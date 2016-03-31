@@ -1,0 +1,63 @@
+﻿<UserControl x:Class="ScrumMasterClient.TasksView"
+             x:Name="tvc"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ScrumMasterClient"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <local:VisibilityConverter x:Key="VisibilityConverter" />        
+    </UserControl.Resources>
+        <Grid x:Name="baseGrid">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <ListBox Grid.Column="0" Grid.Row="0"  x:Name="tasksLB" ItemsSource="{Binding Path=ScrumTasks}" BorderThickness="0">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid x:Name="detailsGrid">
+                            <local:OneTaskView Tag="{DynamicResource OriginalUS}" OrginialScrumTask="{Binding Path=.}" />
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <Grid x:Name="newUSGrid" Grid.Row="1" Grid.Column="0" Visibility="{Binding IsNewUS, Converter={StaticResource VisibilityConverter}}">
+                <Grid.DataContext>
+                    <local:TasksViewViewModel x:Name="tvm"/>
+                </Grid.DataContext>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"  Text="Here you can create new UserStory" ></TextBlock>
+                <Label x:Name="USHeaderLbl" Grid.Row="1" Grid.Column="0" Content="Enter UserStory name here:" Height="27" Width="295"/>
+                <TextBox x:Name="USHeaderTB" Grid.Row="1" Grid.Column="1" Text="{Binding Path=NewUSName}" Height="28" TextWrapping="Wrap" Width="298"/>
+                <Label x:Name="USDescLbl" Grid.Row="2" Grid.Column="0" Content="Enter UserStory Description here:" Height="36" Width="296"/>
+                <TextBox x:Name="USDescTB" Grid.Row="2" Grid.Column="1" Text="{Binding Path=NewUSDescription}" Height="28" TextWrapping="Wrap" Width="298"/>
+
+                <Label x:Name="USPriorityLbl" Grid.Row="3" Grid.Column="0" Content="Enter UserStory's Priority here:" Height="27" Width="295"/>
+                <TextBox x:Name="USPriorityTB" Grid.Row="3" Grid.Column="1" Height="28" TextWrapping="Wrap" Width="298">
+                    <TextBox.Text>
+                        <Binding Path="Priority">
+                            <Binding.ValidationRules>
+                                <ExceptionValidationRule />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+                <Button x:Name="OKBtn" Grid.Row="4" Grid.Column="1" Content="Create" Height="27" Width="109" Click="OKBtn_Click"/>
+            </Grid>
+        </Grid>
+</UserControl>

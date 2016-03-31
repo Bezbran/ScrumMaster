@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScrumMasterWcf", "ScrumMasterWcf\ScrumMasterWcf.csproj", "{7F35B2E6-FF6A-4F8E-971B-FAB164E0982C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScrumMasterServGUI", "ScrumMasterServGUI\ScrumMasterServGUI.csproj", "{9C4687E3-BA5E-4058-81CB-DE5F9BEED001}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScrumMasterClient", "ScrumMasterClient\ScrumMasterClient.csproj", "{23F5FC0C-69EF-4F6E-AE18-DCA1D833E1DB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7F35B2E6-FF6A-4F8E-971B-FAB164E0982C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F35B2E6-FF6A-4F8E-971B-FAB164E0982C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F35B2E6-FF6A-4F8E-971B-FAB164E0982C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F35B2E6-FF6A-4F8E-971B-FAB164E0982C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C4687E3-BA5E-4058-81CB-DE5F9BEED001}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C4687E3-BA5E-4058-81CB-DE5F9BEED001}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C4687E3-BA5E-4058-81CB-DE5F9BEED001}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C4687E3-BA5E-4058-81CB-DE5F9BEED001}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23F5FC0C-69EF-4F6E-AE18-DCA1D833E1DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23F5FC0C-69EF-4F6E-AE18-DCA1D833E1DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23F5FC0C-69EF-4F6E-AE18-DCA1D833E1DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23F5FC0C-69EF-4F6E-AE18-DCA1D833E1DB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

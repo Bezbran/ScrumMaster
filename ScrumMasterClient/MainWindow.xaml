@@ -1,0 +1,59 @@
+﻿<Window x:Class="ScrumMasterClient.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ScrumMasterClient"
+        mc:Ignorable="d"
+        Title="ScrumMasterMainWindow" Height="Auto" Width="Auto">
+
+    <DockPanel LastChildFill="True">
+        <Panel.DataContext>
+            <local:MainWindowModelView x:Name="mwmv"></local:MainWindowModelView>
+        </Panel.DataContext>
+        <Grid DockPanel.Dock="Bottom" Height="Auto">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="Details:"/>
+            <ContentControl Grid.Row="1" Grid.Column="0" x:Name="detailsView" Content="{Binding Path=DetailsBarView}"/>
+        </Grid>
+        <Grid DockPanel.Dock="Left">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock x:Name="teamName" Grid.Row="0" Grid.Column="0" Text="{Binding Path=TeamName}"/>
+            <ContentControl Grid.Row="1" Grid.Column="0" x:Name="usersView" Content="{Binding Path=UsersListView}"/>
+        </Grid>
+        <Grid DockPanel.Dock="Right">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Row="0" Text="Your tasks in current sprint:"/>
+            <ContentControl Grid.Column="0" Grid.Row="1" x:Name="curUserTasksView" Content="{Binding Path=UserTasksView}"></ContentControl>
+        </Grid>
+        <Grid x:Name="topPanel" DockPanel.Dock="Top">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Row="0" Text="UserStorys board:"/>
+            <local:UserStorysViewPicker Grid.Column="0" Grid.Row="1" x:Name="usvp"/>
+        </Grid>
+    </DockPanel>
+</Window>

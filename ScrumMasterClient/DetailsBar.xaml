@@ -1,0 +1,82 @@
+﻿<UserControl x:Class="ScrumMasterClient.DetailsBar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ScrumMasterClient"
+             mc:Ignorable="d" 
+             d:DesignHeight="130" d:DesignWidth="500">
+    <Control.DataContext>
+        <local:DetailsBarViewModel x:Name="dbvm"/>
+    </Control.DataContext>
+    <Grid>
+        <Grid.Resources>
+            <Style TargetType="{x:Type Button}">
+                <Setter Property="Margin" Value="5,5,5,5" />
+            </Style>
+            <Style TargetType="{x:Type TextBlock}">
+                <Setter Property="Margin" Value="5,5,5,5" />
+            </Style>
+            <Style TargetType="{x:Type TextBox}">
+                <Setter Property="Margin" Value="5,5,5,5" />
+            </Style>
+            <Style TargetType="{x:Type Expander}">
+                <Setter Property="Margin" Value="5,5,5,5" />
+            </Style>
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Column="0" Grid.Row="0" Text="Current sprint strated at:"/>
+        <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding Path=SprintStart}"/>
+        <TextBlock Grid.Column="0" Grid.Row="1" Text="Current sprint duration:"/>
+        <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding Path=SprintDuration}"/>
+        <TextBlock Grid.Column="0" Grid.Row="2" Text="My capacity:"/>
+        <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Path=CurUserCapacity}" Height="25" MaxLines="1" KeyDown="TextBox_KeyDown"/>
+        <Button x:Name="prevSprintBtn" Grid.Column="2" Grid.Row="0" Height="25" Content="Back to previous sprint" Click="prevSprintBtn_Click" />
+        <Button x:Name="nextSprintBtn" Grid.Column="3" Grid.Row="0" Height="25" Content="Back to next sprint" Click="nextSprintBtn_Click" />
+        <Expander Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="2" x:Name="newSprintExpander" Header="Create new sprint">
+            <Expander.Content>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Sprint duration:" Grid.Column="0" Grid.Row="0"/>
+                    <TextBox Grid.Column="1" Grid.Row="0" x:Name="newDurationTB">
+                        <TextBox.Text>
+                            <Binding Path="NewSprintDuration">
+                                <Binding.ValidationRules>
+                                    <ExceptionValidationRule />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                    <TextBlock Grid.Column="0" Grid.Row="1" Text="Starting date:" />
+                    <DatePicker x:Name="newSprintDP" Grid.Column="1" Grid.Row="1" SelectedDate="{Binding Path=NewSprintStart}">                        
+                    </DatePicker>
+                    <Button Grid.Column="1" Grid.Row="2" x:Name="newSprintBtn"  Height="25" Content="Create" Click="newSprintBtn_Click" />
+                </Grid>
+            </Expander.Content>
+        </Expander>
+        <TextBlock Margin="10" Text="Status:" Grid.Column="4" Grid.Row="0"/>
+        <TextBlock Margin="10" x:Name="statusTB" Text="{Binding Path=Status}" Grid.Column="4" Grid.Row="1" Grid.RowSpan="2"/>
+        
+    </Grid>
+</UserControl>

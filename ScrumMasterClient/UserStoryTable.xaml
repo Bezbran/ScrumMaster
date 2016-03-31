@@ -1,0 +1,30 @@
+﻿<UserControl x:Class="ScrumMasterClient.UserStoryTable"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ScrumMasterClient"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.DataContext>
+        <local:UserStoryTableViewModel x:Name="ustvm"/>
+    </UserControl.DataContext>
+    <Grid x:Name="baseGrid" >
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
+        <Border Grid.Row="0" Grid.ColumnSpan="5" Background="White"></Border>
+        <TextBlock Margin="5" Grid.Row="0" Grid.Column="0" Text="User Story"/>
+        <TextBlock Margin="5" Grid.Row="0" Grid.Column="1" Text="To do"/>
+        <TextBlock Margin="5" Grid.Row="0" Grid.Column="2" Text="In progress"/>
+        <TextBlock Margin="5" Grid.Row="0" Grid.Column="3" Text="Impediment"/>
+        <TextBlock Margin="5" Grid.Row="0" Grid.Column="4" Text="Done"/>
+    </Grid>
+</UserControl>
