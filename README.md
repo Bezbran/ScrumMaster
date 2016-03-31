@@ -3,7 +3,7 @@ App which allows any scrum team to manage them working flow.
 
 To begin USING the ScrumMaster application, you need to 
   1. Download the files from "ScrumMaster\ScrumMasterServGUI\bin\Debug".
-  2. Run the ScrumMasterServGUI.exe with your parameters. These app needs to run all the time to recive users actions.
+  2. Run the ScrumMasterServGUI.exe with your parameters. This app needs to run all the time to recive users actions.
   3. Download the files from "ScrumMaster\ScrumMasterClient\bin\Debug".
   3. Run the ScrumMasterClient.exe and login as the manager user.
   4. Add some users, you must add scrum-master user and product-owner user.
