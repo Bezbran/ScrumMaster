@@ -15,14 +15,12 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="auto" />
             </Grid.ColumnDefinitions>
-            <ListBox Grid.Column="0" Grid.Row="0"  x:Name="tasksLB" ItemsSource="{Binding Path=ScrumTasks}" BorderThickness="0">
+            <ListBox Grid.Column="0" Grid.Row="0"  x:Name="tasksLB" ItemsSource="{Binding Path=ScrumTasks}" BorderThickness="0" Height="350" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <Grid x:Name="detailsGrid">
                             <local:OneTaskView Tag="{DynamicResource OriginalUS}" OrginialScrumTask="{Binding Path=.}" />
-                        </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>

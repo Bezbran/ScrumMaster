@@ -49,6 +49,11 @@ namespace ScrumMasterClient
             }
 
         }
+        /// <summary>
+        /// Creates new task with the details in the form
+        /// </summary>
+        /// <param name="sender">The create button</param>
+        /// <param name="e"></param>
 
         private void UpdateBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -91,6 +96,11 @@ namespace ScrumMasterClient
 
             tluc.Height = cvuc.Height = StaticsElements.CurStatElem.MainWindow.ActualHeight - StaticsElements.CurStatElem.MainWindow.detailsView.ActualHeight - 10;
             tluc.Width = cvuc.Width = StaticsElements.CurStatElem.MainWindow.ActualWidth - StaticsElements.CurStatElem.MainWindow.usersView.ActualWidth - StaticsElements.CurStatElem.MainWindow.curUserTasksView.ActualWidth - 10;
+        }
+
+        private void TabItem_GotFocus(object sender, RoutedEventArgs e)
+        {
+           
         }
     }
 }

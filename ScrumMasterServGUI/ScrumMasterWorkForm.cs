@@ -15,6 +15,7 @@ namespace ScrumMasterServGUI
     /// </summary>
     public partial class ScrumMasterWorkForm : Form
     {
+        private bool isTest = false;
         /// <summary>
         /// The host object of this server
         /// </summary>
@@ -44,10 +45,12 @@ namespace ScrumMasterServGUI
         /// <param name="isTest"></param>
         public ScrumMasterWorkForm(bool isTest)
         {
+            this.isTest = isTest;
             InitializeComponent();
             // To prevent language problems in errors, we will change the CultureInfo to english
             Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-us");
             InitIpAdrresses();
+
             if (isTest)
                 GenerateTestSM();
         }
@@ -207,8 +210,9 @@ namespace ScrumMasterServGUI
                 turnStopStart(true);
             }
             catch (Exception ex)
-            {
+            {                
                 MessageBox.Show(ex.Message);
+                if (isTest) this.Close();
             }
         }
         /// <summary>

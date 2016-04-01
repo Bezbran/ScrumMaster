@@ -15,7 +15,7 @@ namespace ScrumMasterClient
     {
         ScrumTask st;
         /// <summary>
-        /// Stores the ScrumTask object which recived from server
+        /// Stores the ScrumTask object which was recived from server
         /// </summary>
         public ScrumTask St
         {
@@ -40,7 +40,6 @@ namespace ScrumMasterClient
                 RaisePropertyChanged("St");
             }
         }
-        private bool isNewUS = false;
         string name = "";
         string description = "";
         double plannedEffort = 0;
@@ -48,6 +47,8 @@ namespace ScrumMasterClient
         /// Holds the all possible states
         /// </summary>
         private Job.JobStatuses[] jobStatuses;
+        private UserStory orgUS;
+
         /// <summary>
         /// Stores the new task name
         /// </summary>
@@ -83,6 +84,12 @@ namespace ScrumMasterClient
         /// <summary>
         /// Stores the new task name
         /// </summary>
+        /// <summary>
+        /// Stores the new task Planned Effort
+        /// </summary>
+        /// <summary>
+        /// The Visibility property below actualy converting bool values to appropriate Visibility values.
+        /// </summary>
         public double PlannedEffort
         {
             get
@@ -96,25 +103,6 @@ namespace ScrumMasterClient
                 RaisePropertyChanged("PlannedEffort");
             }
         }
-        /// <summary>
-        /// Stores the new task Planned Effort
-        /// </summary>
-        public bool IsNewUS
-        {
-            get
-            {
-                return isNewUS;
-            }
-
-            set
-            {
-                isNewUS = value;
-                RaisePropertyChanged("IsNewUS");
-            }
-        }
-        /// <summary>
-        /// The Visibility property below actualy converting bool values to appropriate Visibility values.
-        /// </summary>
         public Visibility ShowDetails
         {
             get
@@ -211,6 +199,20 @@ namespace ScrumMasterClient
                 RaisePropertyChanged("JobStatus");
             }
         }
+
+        public UserStory OriginalUserStory
+        {
+            get
+            {
+                return this.orgUS;
+            }
+            set
+            {
+                this.orgUS = value;
+                RaisePropertyChanged("OriginalUserStory");
+            }
+        }
+
         /// <summary>
         /// Creates new object and initialize list of possible states for tasks
         /// </summary>

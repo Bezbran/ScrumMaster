@@ -92,9 +92,10 @@ namespace ScrumMasterClient
                         tv.tvm.ScrumTasksList = statSTList;
                         tv.tasksLB.ItemsSource = tv.tvm.ScrumTasksList;
                         Grid.SetRow(tv, 1);
-                        Grid.SetColumn(tv, j);
+                        Grid.SetColumn(tv, j*2);
                         baseGrid.Children.Add(tv);
-                        baseGrid.Height = 100 * maxTasks;
+                        //TODO: fix gui
+                        //baseGrid.Height = 80 * maxTasks;
                     }
 
                 }

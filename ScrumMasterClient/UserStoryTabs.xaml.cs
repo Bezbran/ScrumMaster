@@ -43,9 +43,9 @@ namespace ScrumMasterClient
                 // In addition, we need to save the expanded tasks of this US
                 activeUSTasksLV = FindControl<ListBox>.FindControlInViewTree(tivm.TasksListView);
                 expandedTasksIds = ExpendedItems(activeUSTasksLV);
-                if (tivm.TasksListView.NewTaskOTV != null && tivm.TasksListView.NewTaskOTV.newTaskExpander.IsExpanded)
-                    // The user started to create new task
-                    activeNewTaskOTV = tivm.TasksListView.NewTaskOTV;
+                //if (tivm.TasksListView.NewTaskOTV != null && tivm.TasksListView.NewTaskOTV.newTaskExpander.IsExpanded)
+                //    // The user started to create new task
+                //    activeNewTaskOTV = tivm.TasksListView.NewTaskOTV;
             }
             // If the user wrote somthing in newUserStory tab Textboxs, we want it to stay (just product-owner can create new USs)
             if (userStorysTC.SelectedIndex == (userStorysTC.Items.Count - 1) && !StaticsElements.CurStatElem.CurrentUser.Positions.Contains(User.Position.ProductOwner))
@@ -81,11 +81,7 @@ namespace ScrumMasterClient
             if (activeNewTaskOTV != null)
             {
                 tivm.TasksListView.NewTaskOTV.UpdateLayout();
-                tivm.TasksListView.NewTaskOTV.TaskHeaderTB.Text = activeNewTaskOTV.TaskHeaderTB.Text;
-                tivm.TasksListView.NewTaskOTV.TaskPlannedEffortTB.Text = activeNewTaskOTV.TaskPlannedEffortTB.Text;
-                tivm.TasksListView.NewTaskOTV.TaskDescTB.Text = activeNewTaskOTV.TaskDescTB.Text;
-                tivm.TasksListView.NewTaskOTV.newTaskExpander.IsExpanded = true;
-                tivm.TasksListView.NewTaskOTV.Focus();
+                //TODO: fix refresh
             }
         }
         /// <summary>

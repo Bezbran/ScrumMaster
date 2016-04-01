@@ -6,17 +6,20 @@
              xmlns:local="clr-namespace:ScrumMasterClient"
              mc:Ignorable="d" 
              d:DesignHeight="300" SizeChanged="UserControl_SizeChanged">
+    <UserControl.Resources>
+        <local:VisibilityConverter x:Key="VisibilityConverter" />
+    </UserControl.Resources>
     <Grid>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
-            <Grid x:Name="detailsGrid" Grid.Row="0" Grid.Column="0" Visibility="{Binding Path=ShowDetails}" MouseDown="detailsGrid_MouseDown">
+            <Grid x:Name="detailsGrid" Grid.Row="0" Grid.Column="0"  Margin="5" Visibility="{Binding Path=ShowDetails}" MouseDown="detailsGrid_MouseDown">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
@@ -46,9 +49,10 @@
                 <Button Visibility="Collapsed" Grid.Row="0" Grid.RowSpan="3" Grid.Column="3" x:Name="UpdateBtn" Content="Update" Margin="10" Padding="10" Click="UpdateBtn_Click"/>
                 <Button Visibility="Collapsed" Grid.Row="3" Grid.RowSpan="2" Grid.Column="3" x:Name="DeleteBtn" Content="Delete" Margin="10" Padding="10" Click="DeleteBtn_Click"/>
             </Grid>
-            <TabControl Grid.Column="0" Grid.Row="2" x:Name="tasksViewTabs" SelectedIndex="1">
-                <TabItem Header="List view">
-                    <ScrollViewer ScrollViewer.CanContentScroll="True" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto">
+            <local:NewTaskUC Grid.Column="1" Grid.Row="0" Tag="{Binding Path=OriginalUserStory}" Margin="5"/>
+            <TabControl Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Margin="5" x:Name="tasksViewTabs" SelectedIndex="1">
+                <TabItem Header="List view" GotFocus="TabItem_GotFocus">
+                    <ScrollViewer>
                         <ContentControl x:Name="tluc" Content="{Binding Path=TasksListView}"
             HorizontalContentAlignment="Left" 
             VerticalContentAlignment="Center" 
@@ -63,7 +67,6 @@
                     </ScrollViewer>
                 </TabItem>
             </TabControl>
-
         </Grid>
     </Grid>
 </UserControl>
