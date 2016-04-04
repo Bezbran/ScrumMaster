@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"  
              xmlns:local ="clr-namespace:ScrumMasterClient"
-             mc:Ignorable="d" 
+             mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
         <local:VisibilityConverter x:Key="VisibilityConverter" />
@@ -28,9 +28,9 @@
             </TabControl.ItemTemplate>
             <TabControl.ContentTemplate>
                 <DataTemplate>
-                    <local:OneTabView Tag="{Binding}" >
-                        
-                    </local:OneTabView>
+                    <ContentControl x:Name="otv" Content="{Binding OneTabView}"></ContentControl>
+                    <!--<local:OneTabView x:Name="otv" Tag="{Binding}">                        
+                    </local:OneTabView>-->
                 </DataTemplate>
             </TabControl.ContentTemplate>
         </TabControl>

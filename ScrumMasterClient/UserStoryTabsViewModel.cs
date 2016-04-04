@@ -42,15 +42,15 @@ namespace ScrumMasterClient
                 foreach (UserStory us in uss)
                 {
                     var ti = new TabItemViewModel(us);
-                    ti.TasksListView = new TasksView();
+                    //ti.TasksListView = new TasksView();
                     ti.OriginalUserStory = us;
                     tabs.Add(ti);
                 }
             // Adding the form of new US if needed
-            var tbivm = new TabItemViewModel { TasksListView = new TasksView() };
-            tbivm.OriginalUserStory = new UserStory("Create new UserStory", "Here you can create new UserStory", -1);
-            tbivm.TasksListView.IsNewUs = true;
-            tabs.Add(tbivm);
+            //var tbivm = new TabItemViewModel { TasksListView = new TasksView() };
+            //tbivm.OriginalUserStory = new UserStory("Create new UserStory", "Here you can create new UserStory", -1);
+            //tbivm.TasksListView.IsNewUs = true;
+            //tabs.Add(tbivm);
             return tabs;
         }
         /// <summary>

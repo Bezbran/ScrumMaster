@@ -62,6 +62,7 @@
     <Compile Include="CombinedView.xaml.cs">
       <DependentUpon>CombinedView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CombinedViewViewModel.cs" />
     <Compile Include="ConnectModelView.cs" />
     <Compile Include="CurrentUserTasksView.xaml.cs">
       <DependentUpon>CurrentUserTasksView.xaml</DependentUpon>

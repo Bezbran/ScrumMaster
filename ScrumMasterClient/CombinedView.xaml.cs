@@ -24,10 +24,11 @@ namespace ScrumMasterClient
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        internal void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             if (this.Tag != null && this.Tag is UserStory)
-                UserStoryTable.LoadUS(this.baseGrid, (UserStory)this.Tag);
+                this.DataContext = new CombinedViewViewModel(Tag as UserStory);
+            
         }
     }
 }

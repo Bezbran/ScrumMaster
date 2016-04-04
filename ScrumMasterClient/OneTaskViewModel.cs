@@ -48,6 +48,8 @@ namespace ScrumMasterClient
         /// </summary>
         private Job.JobStatuses[] jobStatuses;
         private UserStory orgUS;
+        private int priority = 0;
+
 
         /// <summary>
         /// Stores the new task name
@@ -101,6 +103,19 @@ namespace ScrumMasterClient
             {
                 plannedEffort = value;
                 RaisePropertyChanged("PlannedEffort");
+            }
+        }
+        public int Priority
+        {
+            get
+            {
+                return priority;
+            }
+
+            set
+            {
+                priority = value;
+                RaisePropertyChanged("Priority");
             }
         }
         public Visibility ShowDetails
@@ -199,7 +214,6 @@ namespace ScrumMasterClient
                 RaisePropertyChanged("JobStatus");
             }
         }
-
         public UserStory OriginalUserStory
         {
             get

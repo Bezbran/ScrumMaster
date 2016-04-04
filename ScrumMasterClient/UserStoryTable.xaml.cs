@@ -47,10 +47,10 @@ namespace ScrumMasterClient
                     {
                         var statSTList = ustvm.UserStorys[i].ScrumTasks.FindAll((x) => x.JobStatus == possibleStatuses[j]);
                         if (statSTList == null || statSTList.Count < 1) continue;
-                        TasksView tv = new TasksView();
-                        tv.OriginalUS = ustvm.UserStorys[i];
-                        tv.tvm.ScrumTasksList = statSTList;
-                        tv.tasksLB.ItemsSource = tv.tvm.ScrumTasksList;
+                        TasksViewViewModel tvvm = new TasksViewViewModel();
+                        tvvm.OriginalUserStory = ustvm.UserStorys[i];
+                        tvvm.ScrumTasksList = statSTList;
+                        TasksView tv = new TasksView(tvvm);
                         Grid.SetRow(tv, i + 1);
                         Grid.SetColumn(tv, j + 1);
                         baseGrid.Children.Add(tv);
@@ -79,20 +79,25 @@ namespace ScrumMasterClient
                 if (orgUS != null)
                 {
                     double maxTasks = 0;
-                    baseGrid.RowDefinitions.Add(new RowDefinition());
+                    if (baseGrid.RowDefinitions.Count == 1)
+                        baseGrid.RowDefinitions.Add(new RowDefinition());
+                    else
+                    {
+                        baseGrid.Children.Clear();
+                    }
                     for (int j = 0; j < possibleStatuses.Length; j++)
                     {
                         var statSTList = orgUS.ScrumTasks.FindAll((x) => x.JobStatus == possibleStatuses[j]);
                         if (statSTList == null || statSTList.Count < 1) continue;
                         if (maxTasks < statSTList.Count)
                             maxTasks = statSTList.Count;
-                        TasksView tv = new TasksView();
+                        TasksViewViewModel tvvm = new TasksViewViewModel();
+                        tvvm.OriginalUserStory = orgUS;
+                        tvvm.ScrumTasksList = statSTList;
+                        TasksView tv = new TasksView(tvvm);
                         tv.Margin = new Thickness(5);
-                        tv.OriginalUS = orgUS;
-                        tv.tvm.ScrumTasksList = statSTList;
-                        tv.tasksLB.ItemsSource = tv.tvm.ScrumTasksList;
                         Grid.SetRow(tv, 1);
-                        Grid.SetColumn(tv, j*2);
+                        Grid.SetColumn(tv, j * 2);
                         baseGrid.Children.Add(tv);
                         //TODO: fix gui
                         //baseGrid.Height = 80 * maxTasks;
@@ -104,6 +109,6 @@ namespace ScrumMasterClient
             {
 
             }
-}
+        }
     }
 }
