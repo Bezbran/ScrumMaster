@@ -39,7 +39,6 @@ namespace ScrumMasterClient
             mwmv.DetailsBarView = new DetailsBar();
             mwmv.DetailsBarView.dbvm.Status = this.status;
             this.usvp.ustblv.ustvm.UserStorys = StaticsElements.CurStatElem.CurrentSprint.UserStorys;
-            this.usvp.ustblv.LoadUS();
             StartCheckUpdateTimer();
         }
         /// <summary>

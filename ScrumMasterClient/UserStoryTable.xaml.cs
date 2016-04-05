@@ -22,12 +22,14 @@ namespace ScrumMasterClient
     public partial class UserStoryTable : UserControl
     {
         private static Job.JobStatuses[] possibleStatuses;
+        public bool IsLoaded = false;
         public UserStoryTable()
         {
             InitializeComponent();
         }
         internal void LoadUS()
         {
+            if (IsLoaded) return;
             try
             {
                 baseGrid.RowDefinitions.Add(new RowDefinition());
@@ -62,6 +64,7 @@ namespace ScrumMasterClient
             {
 
             }
+            IsLoaded = true;
         }
 
         private static void InitPossibleStatuses()
@@ -70,45 +73,10 @@ namespace ScrumMasterClient
             tmpList.Remove(Job.JobStatuses.Accepted);
             possibleStatuses = tmpList.ToArray();
         }
-
-        static internal void LoadUS(Grid baseGrid, UserStory orgUS)
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                if (possibleStatuses == null) InitPossibleStatuses();
-                if (orgUS != null)
-                {
-                    double maxTasks = 0;
-                    if (baseGrid.RowDefinitions.Count == 1)
-                        baseGrid.RowDefinitions.Add(new RowDefinition());
-                    else
-                    {
-                        baseGrid.Children.Clear();
-                    }
-                    for (int j = 0; j < possibleStatuses.Length; j++)
-                    {
-                        var statSTList = orgUS.ScrumTasks.FindAll((x) => x.JobStatus == possibleStatuses[j]);
-                        if (statSTList == null || statSTList.Count < 1) continue;
-                        if (maxTasks < statSTList.Count)
-                            maxTasks = statSTList.Count;
-                        TasksViewViewModel tvvm = new TasksViewViewModel();
-                        tvvm.OriginalUserStory = orgUS;
-                        tvvm.ScrumTasksList = statSTList;
-                        TasksView tv = new TasksView(tvvm);
-                        tv.Margin = new Thickness(5);
-                        Grid.SetRow(tv, 1);
-                        Grid.SetColumn(tv, j * 2);
-                        baseGrid.Children.Add(tv);
-                        //TODO: fix gui
-                        //baseGrid.Height = 80 * maxTasks;
-                    }
-
-                }
-            }
-            catch (Exception ex)
-            {
-
-            }
+            LoadUS();
+            
         }
     }
 }

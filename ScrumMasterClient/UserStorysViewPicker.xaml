@@ -5,19 +5,23 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ScrumMasterClient"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="650">
     <Grid>
-        <TabControl x:Name="tabControl" SelectedIndex="0" HorizontalAlignment="Left" Height="auto" Margin="5" VerticalAlignment="Top" Width="auto">
+        <TabControl x:Name="tabControl" SelectedIndex="0" Margin="5" >
             <TabItem Header="TabsView" >
                 <Grid Background="#FFE5E5E5">
                     <ContentControl x:Name="ussv" Content="{Binding Path=UserStorysView}">
-                        
                     </ContentControl>
                 </Grid>
             </TabItem>
             <TabItem Header="TableView">
                 <Grid Background="#FFE5E5E5">
                     <local:UserStoryTable x:Name="ustblv"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Create new UserStory">
+                <Grid Background="#FFE5E5E5">
+                    <local:NewUserStory x:Name="nusuc"/>
                 </Grid>
             </TabItem>
         </TabControl>
