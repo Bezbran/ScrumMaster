@@ -24,17 +24,13 @@ namespace ScrumMasterClient
 
         public OneTabView()
         {
-            InitializeComponent();
-            tluc.Height = cvuc.Height = StaticsElements.CurStatElem.MainWindow.ActualHeight - StaticsElements.CurStatElem.MainWindow.detailsView.ActualHeight - 10;
-            tluc.Width = cvuc.Width = StaticsElements.CurStatElem.MainWindow.ActualWidth - StaticsElements.CurStatElem.MainWindow.usersView.ActualWidth - StaticsElements.CurStatElem.MainWindow.curUserTasksView.ActualWidth - 10;
+            InitializeComponent();            
         }
-
         private void detailsGrid_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ClickCount > 1)
                 SwitchEditingMode();
         }
-
         private void SwitchEditingMode()
         {
             if (descriptionTB.Visibility != Visibility.Visible)
@@ -49,7 +45,6 @@ namespace ScrumMasterClient
             }
 
         }
-
         private void UpdateBtn_Click(object sender, RoutedEventArgs e)
         {
             var orgTIVM = (TabItemViewModel)Tag;
@@ -66,7 +61,6 @@ namespace ScrumMasterClient
                 }
             }
         }
-
         private void DeleteBtn_Click(object sender, RoutedEventArgs e)
         {
             MessageBoxResult mbr = MessageBox.Show("Are you sure you want to delete this UserStory?", "ScrumMaster", MessageBoxButton.YesNo, MessageBoxImage.Question);
@@ -85,12 +79,6 @@ namespace ScrumMasterClient
                 }
             }
         }
-
-        private void UserControl_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-
-            tluc.Height = cvuc.Height = StaticsElements.CurStatElem.MainWindow.ActualHeight - StaticsElements.CurStatElem.MainWindow.detailsView.ActualHeight - 10;
-            tluc.Width = cvuc.Width = StaticsElements.CurStatElem.MainWindow.ActualWidth - StaticsElements.CurStatElem.MainWindow.usersView.ActualWidth - StaticsElements.CurStatElem.MainWindow.curUserTasksView.ActualWidth - 10;
-        }
+        
     }
 }

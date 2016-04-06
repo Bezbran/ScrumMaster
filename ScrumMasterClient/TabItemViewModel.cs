@@ -15,6 +15,7 @@ namespace ScrumMasterClient
         private String description = " ";
         private String header = "";
         private int priority = -1;
+        private OneTabView oneTabView = new OneTabView();
         public String Description {
             get
             {
@@ -41,32 +42,35 @@ namespace ScrumMasterClient
         /// <summary>
         /// Holds the view of the tasks of this UserStory
         /// </summary>
-        public TasksView TasksListView
-        {
-            get
-            {
-                return tv;
-            }
+        //public TasksView TasksListView
+        //{
+        //    get
+        //    {
+        //        return tv;
+        //    }
 
-            set
-            {
-                tv = value;
-                RaisePropertyChanged("TasksListView");
-            }
-        }
+        //    set
+        //    {
+        //        tv = value;
+        //        RaisePropertyChanged("TasksListView");
+        //    }
+        //}
         /// <summary>
         /// Holds the UserStory of this tab
         /// </summary>
+        private UserStory originalUserStory;
+
         public UserStory OriginalUserStory
         {
             get
             {
-                return TasksListView.OriginalUS;
+                return originalUserStory;
             }
 
             set
             {
-                TasksListView.OriginalUS = value;
+                //TasksListView.OriginalUS = value;
+                originalUserStory = value;
                 this.Description = value.Description;
                 this.Header = value.Header;
                 this.Priority = value.Priority;
@@ -155,6 +159,20 @@ namespace ScrumMasterClient
             }
         }
 
+        public OneTabView OneTabView
+        {
+            get
+            {
+                return oneTabView;
+            }
+
+            set
+            {
+                oneTabView = value;
+                RaisePropertyChanged("OneTabView");
+            }
+        }
+
         /// <summary>
         /// Creates new object and loads the possible statuses for task/user-story
         /// </summary>
@@ -162,19 +180,19 @@ namespace ScrumMasterClient
         {
             var ps = Enum.GetValues(typeof(Job.JobStatuses));
             JobStatuses = ps.Cast<Job.JobStatuses>().ToArray();
+            this.OneTabView.Tag = this;
+            this.OneTabView.DataContext = this;
         }
-        public TabItemViewModel(UserStory orgUS)
+        public TabItemViewModel(UserStory orgUS):this()
         {
-            var ps = Enum.GetValues(typeof(Job.JobStatuses));
-            JobStatuses = ps.Cast<Job.JobStatuses>().ToArray();
-            //originalUserStory = orgUS;
+            originalUserStory = orgUS;
         }
         /// <summary>
         /// Not in use, uses for future needs
         /// </summary>
         public void Refresh()
         {
-            TasksListView = TasksListView;
+            //TasksListView = TasksListView;
             ShowDetails = ShowDetails;
             JobStatus = JobStatus;
         }

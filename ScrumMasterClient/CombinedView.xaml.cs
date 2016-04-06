@@ -1,35 +1,34 @@
 ﻿using ScrumMasterWcf;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace ScrumMasterClient
 {
     /// <summary>
-    /// Interaction logic for CombinedView.xaml
+    /// Shows the tasks in table order by them status
     /// </summary>
     public partial class CombinedView : UserControl
     {
+        /// <summary>
+        /// Initializing new combined view of userstorys.
+        /// One need to set the Tag property to UserStory object in order to make this view available,
+        ///  otherwise the UserControl_Loaded will failed.
+        /// </summary>
+
         public CombinedView()
         {
             InitializeComponent();
         }
-
-        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Init the Userstorys into the view, working only if Tag property is UserStory object.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        internal void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             if (this.Tag != null && this.Tag is UserStory)
-                UserStoryTable.LoadUS(this.baseGrid, (UserStory)this.Tag);
+                this.DataContext = new CombinedViewViewModel(Tag as UserStory);
+            
         }
     }
 }

@@ -7,28 +7,31 @@
              mc:Ignorable="d" 
              Loaded="UserControl_Loaded"
              d:DesignHeight="300" d:DesignWidth="700">
-    
-        <Grid x:Name="baseGrid" VerticalAlignment="Top">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="25"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="auto"/>
-            </Grid.ColumnDefinitions>
-            <Border Grid.Row="0" Grid.ColumnSpan="8" Background="White"></Border>
-            <TextBlock Margin="5" Grid.Row="0" Grid.Column="0"><Run Text="To do"/>
-            </TextBlock>
-            <GridSplitter  Grid.Column="1" Width="4" ResizeDirection="Columns"/>
-            <TextBlock Margin="5" Grid.Row="0"  Grid.Column="2" Text="In progress"/>
-            <GridSplitter Width="4" Grid.Column="3" ResizeDirection="Columns"/>
-            <TextBlock Margin="5" Grid.Row="0" Grid.Column="4" Text="Impediment"/>
-            <GridSplitter Width="4" Grid.Column="5" ResizeDirection="Columns"/>
-            <TextBlock Margin="5" Grid.Row="0" Grid.Column="6" Text="Done"/>
-        </Grid>
+    <Grid x:Name="baseGrid" VerticalAlignment="Top">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
+        <Border Grid.Row="0" Grid.ColumnSpan="8" Background="White"></Border>
+        <TextBlock Margin="5" Grid.Row="0" Grid.Column="0" Text="To do"/>
+        <GridSplitter  Grid.Column="1" Width="4" ResizeDirection="Columns"/>
+        <TextBlock Margin="5" Grid.Row="0"  Grid.Column="2" Text="In progress"/>
+        <GridSplitter Width="4" Grid.Column="3" ResizeDirection="Columns"/>
+        <TextBlock Margin="5" Grid.Row="0" Grid.Column="4" Text="Impediment"/>
+        <GridSplitter Width="4" Grid.Column="5" ResizeDirection="Columns"/>
+        <TextBlock Margin="5" Grid.Row="0" Grid.Column="6" Text="Done"/>
+        <local:TasksView Grid.Row="1" Grid.Column="0" x:Name="todoTV" Tag="{Binding ToDoTasks}"/>
+        <local:TasksView Grid.Row="1" Grid.Column="2" x:Name="inprogressTV" Tag="{Binding InProgressTasks}"/>
+        <local:TasksView Grid.Row="1" Grid.Column="4" x:Name="impedimentTV" Tag="{Binding ImpedimentTasks}"/>
+        <local:TasksView Grid.Row="1" Grid.Column="6" x:Name="doneTV" Tag="{Binding DoneTasks}"/>
+    </Grid>
 </UserControl>

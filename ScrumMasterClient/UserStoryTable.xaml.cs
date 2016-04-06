@@ -22,12 +22,14 @@ namespace ScrumMasterClient
     public partial class UserStoryTable : UserControl
     {
         private static Job.JobStatuses[] possibleStatuses;
+        public bool IsLoaded = false;
         public UserStoryTable()
         {
             InitializeComponent();
         }
         internal void LoadUS()
         {
+            if (IsLoaded) return;
             try
             {
                 baseGrid.RowDefinitions.Add(new RowDefinition());
@@ -47,10 +49,10 @@ namespace ScrumMasterClient
                     {
                         var statSTList = ustvm.UserStorys[i].ScrumTasks.FindAll((x) => x.JobStatus == possibleStatuses[j]);
                         if (statSTList == null || statSTList.Count < 1) continue;
-                        TasksView tv = new TasksView();
-                        tv.OriginalUS = ustvm.UserStorys[i];
-                        tv.tvm.ScrumTasksList = statSTList;
-                        tv.tasksLB.ItemsSource = tv.tvm.ScrumTasksList;
+                        TasksViewViewModel tvvm = new TasksViewViewModel();
+                        tvvm.OriginalUserStory = ustvm.UserStorys[i];
+                        tvvm.ScrumTasksList = statSTList;
+                        TasksView tv = new TasksView(tvvm);
                         Grid.SetRow(tv, i + 1);
                         Grid.SetColumn(tv, j + 1);
                         baseGrid.Children.Add(tv);
@@ -62,6 +64,7 @@ namespace ScrumMasterClient
             {
 
             }
+            IsLoaded = true;
         }
 
         private static void InitPossibleStatuses()
@@ -70,39 +73,10 @@ namespace ScrumMasterClient
             tmpList.Remove(Job.JobStatuses.Accepted);
             possibleStatuses = tmpList.ToArray();
         }
-
-        static internal void LoadUS(Grid baseGrid, UserStory orgUS)
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                if (possibleStatuses == null) InitPossibleStatuses();
-                if (orgUS != null)
-                {
-                    double maxTasks = 0;
-                    baseGrid.RowDefinitions.Add(new RowDefinition());
-                    for (int j = 0; j < possibleStatuses.Length; j++)
-                    {
-                        var statSTList = orgUS.ScrumTasks.FindAll((x) => x.JobStatus == possibleStatuses[j]);
-                        if (statSTList == null || statSTList.Count < 1) continue;
-                        if (maxTasks < statSTList.Count)
-                            maxTasks = statSTList.Count;
-                        TasksView tv = new TasksView();
-                        tv.Margin = new Thickness(5);
-                        tv.OriginalUS = orgUS;
-                        tv.tvm.ScrumTasksList = statSTList;
-                        tv.tasksLB.ItemsSource = tv.tvm.ScrumTasksList;
-                        Grid.SetRow(tv, 1);
-                        Grid.SetColumn(tv, j);
-                        baseGrid.Children.Add(tv);
-                        baseGrid.Height = 100 * maxTasks;
-                    }
-
-                }
-            }
-            catch (Exception ex)
-            {
-
-            }
-}
+            LoadUS();
+            
+        }
     }
 }

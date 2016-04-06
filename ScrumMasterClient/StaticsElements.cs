@@ -100,13 +100,13 @@ namespace ScrumMasterClient
         /// Upadting the server with new UserStory
         /// </summary>
         /// <param name="tvm">Contains the details of the new UserStory</param>
-        public void SubmitNewUS(TasksViewViewModel tvm)
+        public void SubmitNewUS(OneTaskViewModel tvm)
         {
             IScrumMasterService client = InitConnection();
 
             if (client != null)
             {
-                UserStory nus = client.CreateNewUserStory(tvm.NewUSName, tvm.NewUSDescription, tvm.Priority, CurrentUser);
+                UserStory nus = client.CreateNewUserStory(tvm.Name, tvm.Description, tvm.Priority, CurrentUser);
                 CurrentSprint = client.GetCurrentSprint(CurrentUser);
                 ((ICommunicationObject)client).Close();
                 isUSSChanged = true;
@@ -124,8 +124,8 @@ namespace ScrumMasterClient
             if (client != null && tivm != null && tivm.OriginalUserStory != null)
             {
                 UserStory nus = client.UpdateUserStory(tivm.OriginalUserStory.ID, CurrentSprint.ID, new UserStory(tivm.Header, tivm.Description, tivm.Priority), CurrentUser);
-
                 ((ICommunicationObject)client).Close();
+                MainWindow.UpdateStatus("UserStory didn't updated. Are you scrum master?");
                 isUSSChanged = true;
 
             }
@@ -142,6 +142,7 @@ namespace ScrumMasterClient
             {
                 bool nus = client.RemoveUserStory(tivm.OriginalUserStory.ID, CurrentSprint.ID, CurrentUser);
                 ((ICommunicationObject)client).Close();
+                MainWindow.UpdateStatus("UserStory didn't removed. Are you scrum master?");
                 isUSSChanged = true;
             }
         }

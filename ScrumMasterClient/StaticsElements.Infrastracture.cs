@@ -244,7 +244,7 @@ namespace ScrumMasterClient
                             MainWindow.mwmv.UserStorysView.Refresh();
                             MainWindow.usvp.ustblv = new UserStoryTable();
                             MainWindow.usvp.ustblv.ustvm.UserStorys = StaticsElements.CurStatElem.CurrentSprint.UserStorys;
-                            MainWindow.usvp.ustblv.LoadUS();
+                            MainWindow.usvp.ustblv.IsLoaded = false;
                             isUSSChanged = false;
                         }
                         catch (Exception ex)

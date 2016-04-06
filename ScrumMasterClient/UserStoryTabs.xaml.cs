@@ -2,6 +2,8 @@
 using System.Linq;
 using System.Windows.Controls;
 using ScrumMasterWcf;
+using System.Windows;
+using System.Windows.Threading;
 
 namespace ScrumMasterClient
 {
@@ -18,7 +20,7 @@ namespace ScrumMasterClient
         public UserStoryTabs()
         {
             InitializeComponent();
-            
+
         }
         /// <summary>
         /// Load the view of the UserStories and their tasks in the strating,
@@ -41,11 +43,11 @@ namespace ScrumMasterClient
                 tivm = ((TabItemViewModel)userStorysTC.SelectedItem);
                 activeUSId = tivm.OriginalUserStory.ID;
                 // In addition, we need to save the expanded tasks of this US
-                activeUSTasksLV = FindControl<ListBox>.FindControlInViewTree(tivm.TasksListView);
+                //activeUSTasksLV = FindControl<ListBox>.FindControlInViewTree(tivm.TasksListView);
                 expandedTasksIds = ExpendedItems(activeUSTasksLV);
-                if (tivm.TasksListView.NewTaskOTV != null && tivm.TasksListView.NewTaskOTV.newTaskExpander.IsExpanded)
-                    // The user started to create new task
-                    activeNewTaskOTV = tivm.TasksListView.NewTaskOTV;
+                //if (tivm.TasksListView.NewTaskOTV != null && tivm.TasksListView.NewTaskOTV.newTaskExpander.IsExpanded)
+                //    // The user started to create new task
+                //    activeNewTaskOTV = tivm.TasksListView.NewTaskOTV;
             }
             // If the user wrote somthing in newUserStory tab Textboxs, we want it to stay (just product-owner can create new USs)
             if (userStorysTC.SelectedIndex == (userStorysTC.Items.Count - 1) && !StaticsElements.CurStatElem.CurrentUser.Positions.Contains(User.Position.ProductOwner))
@@ -62,7 +64,7 @@ namespace ScrumMasterClient
                 {
                     var tivmNewUS = ((TabItemViewModel)userStorysTC.Items[(userStorysTC.Items.Count - 1)]);
                     userStorysTC.SelectedIndex = (userStorysTC.Items.Count - 1);
-                    tivmNewUS.TasksListView = tivm.TasksListView;
+                    //tivmNewUS.TasksListView = tivm.TasksListView;
                 }
             }
             // Recover the active tab of the user, if it's not "create new US" tab
@@ -73,19 +75,15 @@ namespace ScrumMasterClient
             if (expandedTasksIds != null)
             {
                 tivm = ((TabItemViewModel)userStorysTC.SelectedItem);
-                tivm.TasksListView.UpdateLayout();
-                activeUSTasksLV = FindControl<ListBox>.FindControlInViewTree(tivm.TasksListView);
+                //tivm.TasksListView.UpdateLayout();
+                //activeUSTasksLV = FindControl<ListBox>.FindControlInViewTree(tivm.TasksListView);
                 ExpandItems(activeUSTasksLV, expandedTasksIds);
             }
             // Recover the NewTaskOTV details if the user wrote something there
             if (activeNewTaskOTV != null)
             {
-                tivm.TasksListView.NewTaskOTV.UpdateLayout();
-                tivm.TasksListView.NewTaskOTV.TaskHeaderTB.Text = activeNewTaskOTV.TaskHeaderTB.Text;
-                tivm.TasksListView.NewTaskOTV.TaskPlannedEffortTB.Text = activeNewTaskOTV.TaskPlannedEffortTB.Text;
-                tivm.TasksListView.NewTaskOTV.TaskDescTB.Text = activeNewTaskOTV.TaskDescTB.Text;
-                tivm.TasksListView.NewTaskOTV.newTaskExpander.IsExpanded = true;
-                tivm.TasksListView.NewTaskOTV.Focus();
+                //tivm.TasksListView.NewTaskOTV.UpdateLayout();
+                //TODO: fix refresh
             }
         }
         /// <summary>
@@ -128,6 +126,31 @@ namespace ScrumMasterClient
                 }
             }
         }
-        
-    }    
+
+        private void userStorysTC_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.AddedItems == null || e.AddedItems.Count == 0 || e.RemovedItems == null || e.RemovedItems.Count == 0) return;
+            if (!(e.RemovedItems[0] is TabItemViewModel)) return;            
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void otv_Initialized(object sender, System.EventArgs e)
+        {
+
+        }
+
+        private void otv_LayoutUpdated(object sender, System.EventArgs e)
+        {
+
+        }
+
+        private void otv_Unloaded(object sender, RoutedEventArgs e)
+        {
+
+        }
+    }
 }

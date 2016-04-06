@@ -62,7 +62,6 @@ namespace ScrumMasterClient
         public OneTaskView(UserStory orgUS)
         {
             InitializeComponent();
-            this.otvm.IsNewUS = true;
             this.orgUS = orgUS;
         }
         /// <summary>
@@ -71,27 +70,6 @@ namespace ScrumMasterClient
         public OneTaskView()
         {
             InitializeComponent();
-        }
-        /// <summary>
-        /// Creates new task with the details in the form
-        /// </summary>
-        /// <param name="sender">The create button</param>
-        /// <param name="e"></param>
-        private void OKBtn_Click(object sender, RoutedEventArgs e)
-        {
-            if (StaticsElements.CurStatElem != null)
-            {
-                try
-                {
-                    // -1 in HandleUserId value represent future assigment
-                    Thread connThread = new Thread(() => StaticsElements.CurStatElem.SubmitNewTask(orgUS, otvm.Name, otvm.Description, otvm.PlannedEffort, -1));
-                    connThread.Start();
-                }
-                catch (Exception ex)
-                {
-                    StaticsElements.CurStatElem.MainWindow.UpdateStatus("In NewTask:" + ex.Message);
-                }
-            }
         }
         /// <summary>
         /// Adding this task to current user tasks list, which means he will handle it.
@@ -137,7 +115,7 @@ namespace ScrumMasterClient
         }
         private void detailsExpander_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            if (Tag!=null&& e.ClickCount > 1)
+            if (Tag != null && e.ClickCount > 1)
                 if (hearderTBX.Visibility != Visibility.Visible)
                 {
                     updateBtn.Visibility = deleteBtn.Visibility = descTBX.Visibility = effortTBX.Visibility = hearderTBX.Visibility = Visibility.Visible;
@@ -188,7 +166,6 @@ namespace ScrumMasterClient
                 }
             }
         }
-
         private void detailsExpander_Expanded(object sender, RoutedEventArgs e)
         {
             updateBtn.Visibility = deleteBtn.Visibility = descTBX.Visibility = effortTBX.Visibility = hearderTBX.Visibility = Visibility.Collapsed;
